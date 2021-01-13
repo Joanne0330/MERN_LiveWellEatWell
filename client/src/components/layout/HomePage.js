@@ -4,7 +4,6 @@ import RecipeCards from '../RecipeCards';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const HomePage = () => {
-    const wow = 'wow'
     const [hits, setHits] = useState({hits: []});
     const [query, setQuery] = useState("")
     const [search, setSearch] = useState("")
@@ -23,25 +22,30 @@ export const HomePage = () => {
     }, [search]);
     return (
         <Fragment>
-            <h1>at homepage</h1>
-            <p>{wow}</p>
-            <input 
-                type='text'
-                place='Search recipes via ingredient, eg: chicken...'
-                value={query}
-                onChange={even => setQuery(even.target.value)}    
-            />
-            <button
-                type='button'
-                onClick={() => setSearch(query)}
-            >
-            Search
-            </button>
-            {hits.hits.map((item, id) => ( 
-               <RecipeCards key={id} item={item} />
-            ))}
+            <div>
+                <h1>Welcome to Live Well, Eat Well</h1>
+            </div>
+            <div>
+                <input 
+                    type='text'
+                    placeholder='Search recipes via ingredient, eg. chicken...'
+                    value={query}
+                    onChange={event => {
+                        event.preventDefault();
+                        setQuery(event.target.value)
+                    }}    
+                />
+                <button
+                    type='button'
+                    onClick={() => setSearch(query)}
+                >
+                Search
+                </button>
+            </div>
+            <RecipeCards items={hits.hits}/>
         </Fragment>
     )
 }
+
 
 export default HomePage;
