@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import RecipeCards from '../RecipeCards';
+
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const HomePage = () => {
@@ -10,7 +13,7 @@ export const HomePage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios(`https://api.edamam.com/search?q=${search}&app_id=92fdc86e&app_key=${API_KEY}&from=0&to=50`)
+            const res = await axios(`https://api.edamam.com/search?q=${search}&app_id=92fdc86e&app_key=${API_KEY}&from=0&to=10`)
             const items = res.data.hits
 
             setHits({hits: items})
@@ -23,29 +26,40 @@ export const HomePage = () => {
     return (
         <Fragment>
             <div>
-                <h1>Welcome to Live Well, Eat Well</h1>
+                <h1 style={{color: '#008000', fontSize: '50px'}}>Welcome to Live Well, Eat Well</h1>
             </div>
             <div>
                 <input 
+                    style={inputStyle}
                     type='text'
-                    placeholder='Search recipes via ingredient, eg. chicken...'
+                    placeholder='Search via ingredient(s), eg. chicken...'
                     value={query}
                     onChange={event => {
                         event.preventDefault();
                         setQuery(event.target.value)
                     }}    
                 />
-                <button
-                    type='button'
+                {'   '}
+                <Button
+                    variant='warning'
+                    // type='button'
                     onClick={() => setSearch(query)}
                 >
                 Search
-                </button>
+                </Button>
             </div>
             <RecipeCards items={hits.hits}/>
         </Fragment>
     )
 }
-
+const inputStyle = {
+    width: '25%',
+    padding: '10px 18px',
+    margin: '8px 0',
+    border: '2px solid red',
+    borderRadius: '4px',
+    fontSize: '20px',
+    fontFamily: 'Tahoma'
+}
 
 export default HomePage;
