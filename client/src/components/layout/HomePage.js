@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import RecipeCards from '../RecipeCards';
+import Container from 'react-bootstrap/Container';
+
 
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -48,10 +50,23 @@ export const HomePage = () => {
                 Search
                 </Button>
             </div>
-            <RecipeCards items={hits.hits}/>
+            <Container fluid>
+                <div style={pageStyle}>
+                    {hits.hits.map(item => (
+                        <RecipeCards item={item}/>
+                    ))}
+                </div>
+            </Container>
         </Fragment>
     )
 }
+const pageStyle = {
+    display: "flex",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justfyContent: 'space-evenly'
+}
+
 const inputStyle = {
     width: '25%',
     padding: '10px 18px',
