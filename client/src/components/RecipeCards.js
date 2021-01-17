@@ -19,7 +19,7 @@ export const RecipeCards = (item) => {
                             <br></br>
                             <Card.Subtitle style={{color: '#008000'}}>{item.item.recipe.ingredientLines.length} ingredients  |  Serves {item.item.recipe.yield}  |  {Math.round(item.item.recipe.calories / item.item.recipe.yield)} kcal</Card.Subtitle>
                             <br></br>
-                            <Button variant="warning" size="lg">Save to collection</Button>
+                            {/* <Button variant="warning" size="lg">Save to collection</Button> */}
                             <br></br>
                             <Link to={{ pathname: `/details/${item.item.recipe.uri}`, state: {recipe: item} }} >Details</Link>
                         </Card.Body>

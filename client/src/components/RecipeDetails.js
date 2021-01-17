@@ -3,11 +3,46 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
+import axios from 'axios';
 
 export const RecipeDetails = (recipe) => {
     // let recipe = useLocation;
     const details = recipe.history.location.state.recipe.item.recipe
     console.log(details)
+
+    const onClick = async () => {
+
+        const addRecipe = {
+            label: details.label,
+            image: details.image,
+            source: details.source,
+            uri: details.uri,
+            url: details.url,
+            ingredientLines: details.ingredientLines,
+            calories: Math.round(details.calories / details.yield),
+            numberIngredients: details.ingredientLines.length,
+            yield: details.yield
+        };
+
+        console.log(addRecipe);
+
+        try {
+            const config ={
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            const body = JSON.stringify(addRecipe);
+            const res = await axios.post('/api/recipes', body, config);
+            console.log(res.data);
+
+        } catch (err) {
+            
+            // console.error(err.response.data);
+        }
+
+    }
     return (
         <div>
             <h1 style={{color: '#008000', fontSize: '50px'}}>{details.label}</h1>
@@ -25,7 +60,11 @@ export const RecipeDetails = (recipe) => {
                                 <br></br>
                                 <Card.Subtitle style={{color: '#008000'}}>{details.ingredientLines.length} ingredients  |  Serves {details.yield}  |  {Math.round(details.calories / details.yield)} kcal</Card.Subtitle>
                                 <br></br>
-                                <Button variant="warning" size="lg">Save to collection</Button>
+                                <Button 
+                                    variant="warning" 
+                                    size="lg"
+                                    onClick={() => onClick()}
+                                >Save to collection</Button>
                                 <br></br>
                                 <br></br>
                                 {details.ingredientLines.map(item => (
