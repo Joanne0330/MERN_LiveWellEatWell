@@ -49,9 +49,17 @@ router.post('/', async (req, res) => {
 
 });
 
-// @route GET api/recipes
-// @desc Test route
-// @access Public
-router.get('/', (req, res) => res.send('Recipe route!!!'));
+// @route    GET api/recipes
+// @desc     Get all saved recipes
+// @access   Public
+router.get('/', async (req, res) => {
+    try {
+        const recipes = await Recipe.find().sort({ date: -1 }); //sort by the date, most recent fist
+        res.json(recipes);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error!');
+    }
+});
 
 module.exports = router;
