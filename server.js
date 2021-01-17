@@ -7,7 +7,10 @@ const app = express();
 //Connect Database
 connectDB();
 
-app.get('/', (req, res) => res.send('API Running!!'));
+// Initiate middleware to allow body parser
+app.use(express.json({ extended: false }));
+
+app.get('/', (req, res) => res.send('API Running!!!'));
 
 // Definte Routes
 app.use('/api/recipes', require('./routes/api/recipes'));
