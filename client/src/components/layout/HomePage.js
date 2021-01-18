@@ -28,9 +28,6 @@ export const HomePage = () => {
     return (
         <Fragment>
             <div>
-                <h1 style={{color: '#008000', fontSize: '50px'}}>Welcome to Live Well, Eat Well</h1>
-            </div>
-            <div>
                 <input 
                     style={inputStyle}
                     type='text'

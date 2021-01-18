@@ -45,7 +45,7 @@ export const RecipeDetails = (recipe) => {
     }
     return (
         <div>
-            <h1 style={{color: '#008000', fontSize: '50px'}}>{details.label}</h1>
+            <h3 style={{color: '#008000', fontSize: '50px'}}>{details.label}</h3>
             <Link to='/'>Back to search</Link>
             <Container>
                 <div  style={{marginLeft: '20%', marginRight: '20%'}}>
