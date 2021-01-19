@@ -1,11 +1,19 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 
 export const CollectionCard = (item) => {
     console.log(item)
+
+    const deletRecipe = async (id) => {
+        console.log(id);
+        await axios.delete(`/api/recipes/${id}`);
+
+        window.location.reload();
+
+    } 
     return (
         <div>
                 <Card key={item.item.uri} border="danger" style={cardStyle}>
@@ -22,6 +30,7 @@ export const CollectionCard = (item) => {
                                 <Button 
                                     variant="danger" 
                                     size="lg"
+                                    onClick={() => deletRecipe(item.item._id)}
                                 >Delete</Button>
                                 <br></br>
                                 <br></br>

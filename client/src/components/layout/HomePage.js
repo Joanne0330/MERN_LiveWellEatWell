@@ -15,7 +15,7 @@ export const HomePage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios(`https://api.edamam.com/search?q=${search}&app_id=92fdc86e&app_key=${API_KEY}&from=0&to=10`)
+            const res = await axios(`https://api.edamam.com/search?q=${search}&app_id=92fdc86e&app_key=${API_KEY}&from=0&to=50`)
             const items = res.data.hits
 
             setHits({hits: items})

@@ -62,4 +62,30 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+// @route    DELETE api/recipes/:id
+// @desc     Delete a recipe from collection
+// @access   Public
+router.delete('/:id', async ( req, res ) => {
+    try {
+        // console.log(req.params.id);
+        const recipe = await Recipe.findById(req.params.id);
+
+        if(!recipe) {
+            return res.status(404).json({ msg: 'Recipe not found!'});
+        }
+
+        await recipe.remove();
+        res.json({msg: 'Recipe removed!'})
+
+    } catch (err) {
+        console.err(err.message);
+
+        if(err.kind === 'ObjectId') {  //if the kind of error is due to the incorrectly formatted id
+            return res.status(404).json({ msg: 'Recipe not found!!'}); 
+        }
+        res.status(500).send('Server Error!');  
+    }
+});
+
 module.exports = router;
