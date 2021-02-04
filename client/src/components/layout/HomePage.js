@@ -23,8 +23,8 @@ export const HomePage = () => {
             console.log(hits.hits)
         };
         fetchData();
-        
     }, [search]);
+        
     return (
         <Fragment>
             <div>
