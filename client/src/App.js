@@ -6,6 +6,8 @@ import NavBar from './components/layout/NavBar';
 import Header from './components/layout/Header';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeCollection from './components/RecipeCollection';
+import Diary from './components/Diary';
+import DiaryForm from './components/layout/DiaryForm';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route exact path='/' component={HomePage}/>
         <Route path='/details/:id' component={RecipeDetails}/>
         <Route path='/collection' component={RecipeCollection}/>
+        <Route path='/diary' component={Diary}/>
+        <Route path='/diary-form' component={DiaryForm}/>
       </div>
     </Router>
   );

@@ -36,7 +36,7 @@ export const RecipeDetails = (recipe) => {
             const body = JSON.stringify(addRecipe);
             const res = await axios.post('/api/recipes', body, config);
             console.log(res.data);
-            window.alert('Recipe saved!!!')
+            window.alert(res.data)
         } catch (err) {
             
             // console.error(err.response.data);

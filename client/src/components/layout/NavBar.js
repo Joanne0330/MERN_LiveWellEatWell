@@ -9,6 +9,7 @@ export const NavBar = () => {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Search</Nav.Link>
                     <Nav.Link href="/collection">Collection</Nav.Link>
+                    <Nav.Link href="/diary">Diary</Nav.Link>
                 </Nav>
             </Navbar>
         </div>
