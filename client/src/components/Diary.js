@@ -10,7 +10,8 @@ export const Diary = () => {
                     variant='danger' 
                     renderAs='button'
                     size='large'
-                >Record My Daily Activities</Button>
+                >Record My Daily Activities
+                </Button>
             </Link>
             <h1>Diary</h1>
         </div>
