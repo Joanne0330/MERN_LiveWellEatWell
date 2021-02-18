@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'
+import 'react-calendar/dist/Calendar.css';
+import axios from 'axios';
 
 
 const DiaryForm = () => {
@@ -17,7 +18,7 @@ const DiaryForm = () => {
     const [teaching, setTeaching] = useState("")
     
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         console.log(date);
         console.log({yoga, walk, run, video})
@@ -41,9 +42,27 @@ const DiaryForm = () => {
         coding === "half" ? workScore += 5 : coding === "full" ? workScore += 10 : workScore += 0;
         teaching === "small" ? workScore += 3 : teaching === "large" ? workScore += 9 : workScore += 0;
 
-        console.log(musicScore)
-        console.log(physicalScore)
-        console.log(workScore)
+        const obj = {date, physicalScore, musicScore, workScore}
+        console.log(obj);
+        
+        
+        
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            const body = JSON.stringify(obj)
+            console.log(body)
+
+            await axios.post('/api/diary', body, config);
+            window.alert('form posted!')
+            
+        } catch (err) {
+            console.error(err.response.data);
+        }
+
 
 
 
