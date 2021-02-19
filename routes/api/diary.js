@@ -46,4 +46,17 @@ router.post('/', async (req, res) => {
 
 });
 
+// @route    GET api/diary
+// @desc     Get all saved events
+// @access   Public
+router.get('/', async (req, res) => {
+    try {
+        const diary = await Diary.find().sort({ date: 1 }); //sort by the date, oldest first
+        res.json(diary);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error!');
+    }
+});
+
 module.exports = router;
