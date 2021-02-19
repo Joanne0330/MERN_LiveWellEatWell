@@ -56,8 +56,9 @@ const DiaryForm = () => {
             const body = JSON.stringify(obj)
             console.log(body)
 
-            await axios.post('/api/diary', body, config);
-            window.alert('form posted!')
+            const res = await axios.post('/api/diary', body, config);
+            window.alert(res.data)
+            window.location.reload();
             
         } catch (err) {
             console.error(err.response.data);
