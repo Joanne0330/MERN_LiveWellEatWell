@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 export const Diary = () => {
+    const [diary, setDiary] = useState([])
+
+    useEffect( () => {
+        const fetchDiary = async () => {
+
+            const res = await axios.get('/api/diary')
+
+            setDiary(res.data)
+            console.log(diary)
+        }
+        fetchDiary();
+    }, [])
+
     return (
         <div>
             <Link to='/diary-form'>
