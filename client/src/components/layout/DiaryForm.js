@@ -69,14 +69,16 @@ const DiaryForm = () => {
 
     }
     return (
-        <div style={{padding: '8rem'}}>
+        <div style={{padding: '15rem'}}>
             <Form onSubmit={e => onSubmit(e)} >
-                <div style={{display: 'center'}}>
+                <div style={{display: 'inline-block'}}>
                     <Calendar 
                         onChange={setDate}
                         value={date}
                     />
                 </div>
+                <br></br>
+                <br></br>
                 <Form.Group controlId="yoga" onChange={e => setYoga(e.target.value)}>
                     <Form.Label style={{color: '#008000'}}>Yoga</Form.Label>
                     <Form.Control as="select">
