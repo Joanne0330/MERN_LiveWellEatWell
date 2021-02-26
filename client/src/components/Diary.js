@@ -26,15 +26,21 @@ export const Diary = () => {
         
         const fetchDiary = async () => {
             const res = await axios.get('/api/diary')
-            console.log(res.data)
+            console.log(res.data);
             changeDate(res.data);
-            setDiary(res.data)
+            setDiary(res.data);
         }
         
         fetchDiary();
     }, [])
     
-    
+    const weekDisplay = () => {
+        const index = diary.length - 7;
+        console.log(index)
+        const filteredArr = diary.slice(index)
+        console.log(filteredArr)
+        setDiary(filteredArr)
+    }
     
     
 
@@ -43,7 +49,6 @@ export const Diary = () => {
             <Link to='/diary-form'>
                 <Button 
                     variant='danger' 
-                    renderAs='button'
                     size='large'
                 >Record My Daily Activities
                 </Button>
@@ -54,7 +59,7 @@ export const Diary = () => {
             <br></br>
             {loading === false ? (
 
-                <div style={{display: 'inline-block'}}>
+                <div style={{display: 'inline-block', paddingBottom: '3rem'}}>
                     <LineChart width={850} height={400} data={diary} >
                         <Line type="monotone" dataKey="physicalScore" stroke="#5F9EA0"/>
                         <Line type="monotone" dataKey="musicScore" stroke="#B22222"/>
@@ -65,9 +70,17 @@ export const Diary = () => {
                         <Tooltip />
                         <Legend verticalAlign="top" height={36} />
                     </LineChart>
+                    <br></br>
+                    <Button 
+                    variant='success' 
+                    size='large'
+                    onClick={() => weekDisplay()}
+                    >View only last 7 days
+                    </Button>
                 </div>
+
             ) : (
-                <p>loading....</p>
+                <p>Loading....</p>
             )}
         </div>
     )
