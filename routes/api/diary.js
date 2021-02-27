@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 const Diary = require('../../models/Diary');
 
@@ -13,8 +14,6 @@ router.post('/', async (req, res) => {
         musicScore,
         workScore
      } = req.body
-
-     
      
      try {
          const newDiary = new Diary({
@@ -29,14 +28,14 @@ router.post('/', async (req, res) => {
                 //  return res.status(400).json({ errors: [{ msg: 'Event already recored' }] });
             exist.remove();
             await newDiary.save();
-            res.send('Event updated!')
+            res.send('Event updated for ' + moment(date).format('DD/MM/YYYY'));
 
          }
              
                 
                 
         await newDiary.save();
-        res.send('Event recored!')
+        res.send(`Event recored for ` + moment(date).format('DD/MM/YYYY'));
         
     } catch (err) {
         console.error(err.message);

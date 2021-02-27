@@ -14,6 +14,7 @@ const DiarySchema = new Schema({
     workScore: {
         type: Number
     }
+
 });
 
 module.exports = Diary = mongoose.model('diary', DiarySchema);

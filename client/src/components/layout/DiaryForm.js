@@ -61,7 +61,8 @@ const DiaryForm = () => {
             window.location.reload();
             
         } catch (err) {
-            console.error(err.response.data);
+            console.error(err.response.data.errors);
+            window.alert(err.response.data.errors)
         }
 
     }
@@ -74,6 +75,9 @@ const DiaryForm = () => {
                         value={date}
                     />
                 </div>
+                <Form.Text className="text-muted">
+                    Please select a date
+                </Form.Text>
                 <br></br>
                 <br></br>
                 <div style={{marginLeft: '32.5%'}}>
