@@ -30,9 +30,9 @@ const DiaryForm = () => {
         let workScore = 0;
 
         //physical
-        yoga === "30" ? physicalScore += 3 : yoga === "60" ? physicalScore += 6 : physicalScore += 0;
-        walk === "30" ? physicalScore += 3 : walk === "60" ? physicalScore += 6 : walk === "120" ? physicalScore += 10 : physicalScore += 0;
-        run === "20" ? physicalScore += 7 : run === "30" ? physicalScore += 10 : physicalScore += 0;
+        yoga === "30" ? physicalScore += 2 : yoga === "60" ? physicalScore += 5 : physicalScore += 0;
+        walk === "30" ? physicalScore += 2 : walk === "60" ? physicalScore += 5 : walk === "120" ? physicalScore += 10 : physicalScore += 0;
+        run === "20" ? physicalScore += 6 : run === "30" ? physicalScore += 9 : physicalScore += 0;
         video === "20" ? physicalScore += 7 : run === "30" ? physicalScore += 10 : physicalScore += 0;
 
         //music
