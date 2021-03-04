@@ -1,15 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
-const dotenv = require('dotenv');
-const nodemailer = require('nodemailer');
 
 const Diary = require('../../models/Diary');
-
-dotenv.config()
-const SENDER_EMAIL = process.env.SENDER_EMAIL;
-const SENDER_PASSWORD = process.env.SENDER_PASSWORD;
-const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL;
+const mailer = require('../../middleware/mailer');
 
 
 // @route    POST api/diary
@@ -24,28 +18,7 @@ router.post('/', async (req, res) => {
      } = req.body
 
      if(physicalScore < 7) {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: `${SENDER_EMAIL}`,
-              pass: `${SENDER_PASSWORD}`
-            }
-          });
-          
-        const mailOptions = {
-            from: `${SENDER_EMAIL}`,
-            to: `${RECEIVER_EMAIL}`,
-            subject: 'A reminder from Live Well Eat Well App!',
-            text: `Be sure to do more exercise tomorrow! Your physical score today is only ${physicalScore}!`
-        };
-          
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-            console.log(error);
-            } else {
-            console.log('Email sent: ' + info.response);
-            }
-        });
+        mailer(date, physicalScore)
      }
      
      try {
@@ -65,8 +38,6 @@ router.post('/', async (req, res) => {
                 res.send('Event updated for ' + moment(date).format('DD/MM/YYYY'));
                 
             }
-            
-            
             
             await newDiary.save();
             res.send(`Event recored for ` + moment(date).format('DD/MM/YYYY'));
